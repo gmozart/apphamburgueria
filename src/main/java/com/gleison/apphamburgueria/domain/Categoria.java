@@ -2,28 +2,28 @@ package com.gleison.apphamburgueria.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "CATEGORIA")
 public class Categoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = 	GenerationType.IDENTITY)
-	private Integer id;
-	
+	@Column(name = "ID_CATEGORIA")
+	private Long id;
+
+	@Column(name = "NOME_CATEGORIA")
 	private String nome;
 	
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -44,7 +44,7 @@ public class Categoria implements Serializable{
 	}
 
 
-	public Categoria(Integer id, String nome) {
+	public Categoria(Long id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
