@@ -40,7 +40,7 @@ public class CategoriaController {
     public ResponseEntity<Categoria> criar(@RequestBody Categoria categoria, HttpServletResponse response){
         Categoria categoriaSalva = categoriaRepository.save(categoria);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
         .buildAndExpand(categoriaSalva.getId()).toUri();
         response.setHeader("Location",uri.toASCIIString());
 
