@@ -32,8 +32,8 @@ public class CategoriaController {
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public Categoria find(@PathVariable Long id){
-     Optional<Categoria> obj = categoriaRepository.findById(id);
-     return obj.orElse(null);
+     Optional<Categoria> objCategoria = categoriaRepository.findById(id);
+     return objCategoria.orElse(null);
     }
 
     @PostMapping
