@@ -3,6 +3,7 @@ package com.gleison.apphamburgueria.controller;
 
 import com.gleison.apphamburgueria.domain.Categoria;
 import com.gleison.apphamburgueria.repositories.CategoriaRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,9 @@ public class CategoriaController {
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public Categoria find(@PathVariable Long id){
      Optional<Categoria> objCategoria = categoriaRepository.findById(id);
-     return objCategoria.orElse(null);
+     return objCategoria.orElseThrow(()
+             -> new ObjectNotFoundException(" Código de Categoria não encontrado! Código: "+id,
+                ", Tipo: " + Categoria.class.getName()));
     }
 
     @PostMapping

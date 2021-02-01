@@ -6,7 +6,10 @@ import com.gleison.apphamburgueria.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,5 +37,16 @@ public class ProdutoController {
         return objProduto.orElse(null);
     }
 
+    @PostMapping
+    public ResponseEntity<Produto> criar(@RequestBody Produto produto, HttpServletResponse response){
+
+        Produto produtoSalvo = produtoRepository.save(produto);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+            .buildAndExpand(produtoSalvo.getId()).toUri();
+        response.setHeader("Location",uri.toASCIIString());
+
+     return ResponseEntity.created(uri).body(produtoSalvo);
+    }
 
 }
