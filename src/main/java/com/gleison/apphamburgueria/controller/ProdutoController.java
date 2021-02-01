@@ -1,8 +1,10 @@
 package com.gleison.apphamburgueria.controller;
 
 
+import com.gleison.apphamburgueria.domain.Categoria;
 import com.gleison.apphamburgueria.domain.Produto;
 import com.gleison.apphamburgueria.repositories.ProdutoRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +36,8 @@ public class ProdutoController {
 
         Optional<Produto> objProduto =  produtoRepository.findById(id);
 
-        return objProduto.orElse(null);
+        return objProduto.orElseThrow(() -> new ObjectNotFoundException(" Código do Produto não encontrado! Código: "+id,
+        ", Tipo: " + Produto.class.getName()));
     }
 
     @PostMapping
