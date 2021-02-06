@@ -1,7 +1,11 @@
 package com.gleison.apphamburgueria.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +22,9 @@ public class Cidade implements Serializable{
     @Column(name="NOME_CIDADE")
     private String nome;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy  = "cidades")
+    private List<Estado> estado = new ArrayList<>();
 
     public Cidade() {
     }

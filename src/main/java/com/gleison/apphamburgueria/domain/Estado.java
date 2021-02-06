@@ -1,7 +1,11 @@
 package com.gleison.apphamburgueria.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +20,12 @@ public class Estado implements Serializable{
 
     @Column(name="NOME_ESTADO")
     private String nome;
+
+    @JsonBackReference
+    @OneToMany
+    @JoinTable(name = "ESTADO_CIDADE", joinColumns = @JoinColumn(name="ID_ESTADO"),
+    inverseJoinColumns = @JoinColumn(name="ID_CIDADE"))
+    private List<Cidade> cidades = new ArrayList<>();
 
     public Estado() {
     }
