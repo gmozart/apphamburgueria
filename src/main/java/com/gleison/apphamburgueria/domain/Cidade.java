@@ -23,8 +23,9 @@ public class Cidade implements Serializable{
     private String nome;
 
     @JsonManagedReference
-    @OneToMany(mappedBy  = "cidades")
-    private List<Estado> estado = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "id_estado")
+    private Estado Estado;
 
     public Cidade() {
     }

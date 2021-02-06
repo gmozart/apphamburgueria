@@ -21,10 +21,8 @@ public class Estado implements Serializable{
     @Column(name="NOME_ESTADO")
     private String nome;
 
-    @JsonBackReference
-    @OneToMany
-    @JoinTable(name = "ESTADO_CIDADE", joinColumns = @JoinColumn(name="ID_ESTADO"),
-    inverseJoinColumns = @JoinColumn(name="ID_CIDADE"))
+
+    @OneToMany(mappedBy= "estado")
     private List<Cidade> cidades = new ArrayList<>();
 
     public Estado() {
