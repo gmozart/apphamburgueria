@@ -44,6 +44,7 @@ public class CidadeController {
 
       URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
               .buildAndExpand(cidadeSalva.getId()).toUri();
+      response.setHeader("Location",uri.toASCIIString());
 
       return ResponseEntity.created(uri).body(cidadeSalva);
   }
