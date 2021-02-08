@@ -4,20 +4,17 @@ import com.gleison.apphamburgueria.domain.Cidade;
 import com.gleison.apphamburgueria.domain.Produto;
 import com.gleison.apphamburgueria.repositories.CidadeRepository;
 import com.gleison.apphamburgueria.services.exception.ObjectNotFoundException;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.swing.text.html.parser.Entity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
 @RequestMapping("/cidades")
+@RestController
 public class CidadeController {
 
   @Autowired
@@ -40,7 +37,16 @@ public class CidadeController {
               ", Tipo: " + Produto.class.getName()));
   }
 
+  @PostMapping
+  public ResponseEntity<Cidade> criarCidade(@RequestBody Cidade cidade, HttpServletResponse response){
 
+      Cidade cidadeSalva = cidadeRepository.save(cidade);
+
+      URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+              .buildAndExpand(cidadeSalva.getId()).toUri();
+
+      return ResponseEntity.created(uri).body(cidadeSalva);
+  }
 
 
 }
