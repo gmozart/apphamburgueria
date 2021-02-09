@@ -22,6 +22,7 @@ public class Cliente {
     @Column(name = "CPF_CNPJ_CLIENTE")
     private String cpfOUcnpj;
 
+    @Column(name = "TIPO_CLIENTE")
     private TipoCliente tipo;
 
 
