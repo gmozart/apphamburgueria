@@ -21,7 +21,7 @@ public class Estado implements Serializable{
     @Column(name="NOME_ESTADO")
     private String nome;
 
-
+    @JsonBackReference
     @OneToMany(mappedBy= "estado")
     private List<Cidade> cidade = new ArrayList<>();
 
