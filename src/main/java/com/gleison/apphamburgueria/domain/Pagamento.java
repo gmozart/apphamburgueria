@@ -14,4 +14,17 @@ public class Pagamento {
     private Long id;
 
     private EstadoPagamento estado;
+
+    private Pedido pedido;
+
+
+    public Pagamento(){
+
+    }
+
+    public Pagamento(Long id, EstadoPagamento estado, Pedido pedido) {
+        this.id = id;
+        this.estado = estado;
+        this.pedido = pedido;
+    }
 }

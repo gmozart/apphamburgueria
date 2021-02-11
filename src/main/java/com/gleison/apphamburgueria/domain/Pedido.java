@@ -14,12 +14,22 @@ public class Pedido {
 
       private Date instante;
 
+      private Pagamento pagamento;
+
+      private Cliente cliente;
+
+      private Endereco enderecoDeEntrega;
+
     public Pedido() {
     }
 
-    public Pedido(Long id, Date instante) {
+    public Pedido(Long id, Date instante, Pagamento pagamento, Cliente cliente, Endereco enderecoDeEntrega) {
+        super();
         this.id = id;
         this.instante = instante;
+        this.pagamento = pagamento;
+        this.cliente = cliente;
+        this.enderecoDeEntrega = enderecoDeEntrega;
     }
 
     public Long getId() {
