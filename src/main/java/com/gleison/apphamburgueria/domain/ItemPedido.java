@@ -1,11 +1,18 @@
 package com.gleison.apphamburgueria.domain;
 
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "ITEM_PEDIDO")
 public class ItemPedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @EmbeddedId
     public ItemPedidoPK id = new ItemPedidoPK();
 
     private Double desconto;
