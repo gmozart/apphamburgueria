@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "PRODUTO")
@@ -31,42 +29,68 @@ public class Produto implements Serializable {
     inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private List<Categoria> categorias = new ArrayList<>();
 
+    private Set<ItemPedido> itens = new HashSet<>();
+
+    public List<Pedido> getPedidos(){
+
+        List<Pedido> lista = new ArrayList<>();
+
+        for(ItemPedido x : itens){
+
+            lista.add(x.getPedido());
+
+        }
+      return lista;
+    }
+
+    public Produto(){
+    }
+
+    public Produto(Long id, String nome, BigDecimal preco){
+        super();
+
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+
+    }
+
     public Long getId() {
+
         return id;
     }
 
     public String getNome() {
+
         return nome;
     }
 
     public BigDecimal getPreco() {
+
         return preco;
     }
 
     public void setId(Long id) {
+
         this.id = id;
     }
 
     public void setNome(String nome) {
+
         this.nome = nome;
     }
 
     public void setPreco(BigDecimal preco) {
+
         this.preco = preco;
     }
 
-    public Produto(){
-
-
+    public Set<ItemPedido> getItens() {
+        return itens;
     }
 
-    public Produto(Long id, String nome, BigDecimal preco){
-      super();
-
-      this.id = id;
-      this.nome = nome;
-      this.preco = preco;
-
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     @Override

@@ -3,7 +3,9 @@ package com.gleison.apphamburgueria.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "PEDIDO")
@@ -28,6 +30,8 @@ public class Pedido implements Serializable {
       @JoinColumn(name = "endereco_de_entrega_id")
       private Endereco enderecoDeEntrega;
 
+      private Set<ItemPedido> itens = new HashSet<>();
+
     public Pedido() {
     }
 
@@ -41,43 +45,61 @@ public class Pedido implements Serializable {
     }
 
     public Long getId() {
+
         return id;
     }
 
     public void setId(Long id) {
+
         this.id = id;
     }
 
     public Date getInstante() {
+
         return instante;
     }
 
     public void setInstante(Date instante) {
+
         this.instante = instante;
     }
 
     public Pagamento getPagamento() {
+
         return pagamento;
     }
 
     public void setPagamento(Pagamento pagamento) {
+
         this.pagamento = pagamento;
     }
 
     public Cliente getCliente() {
+
         return cliente;
     }
 
     public void setCliente(Cliente cliente) {
+
         this.cliente = cliente;
     }
 
     public Endereco getEnderecoDeEntrega() {
+
         return enderecoDeEntrega;
     }
 
     public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
+
         this.enderecoDeEntrega = enderecoDeEntrega;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     @Override
