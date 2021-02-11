@@ -2,6 +2,11 @@ package com.gleison.apphamburgueria.domain;
 
 import com.gleison.apphamburgueria.domain.enums.EstadoPagamento;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="PAGAMENTO_CARTAO")
 public class PagamencoComCartao extends Pagamento{
 
     private Integer numeroDeParcelas;

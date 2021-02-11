@@ -2,8 +2,12 @@ package com.gleison.apphamburgueria.domain;
 
 import com.gleison.apphamburgueria.domain.enums.EstadoPagamento;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Entity
+@Table(name = "PAGAMENTO_BOLETO")
 public class PagamentoComBoleto extends Pagamento {
 
     private Date dataVencimento;
