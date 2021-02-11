@@ -53,14 +53,17 @@ public class Cliente implements Serializable {
     }
 
     public Long getId() {
+
         return id;
     }
 
     public void setId(Long id) {
+
         this.id = id;
     }
 
     public String getNome() {
+
         return nome;
     }
 
@@ -69,22 +72,27 @@ public class Cliente implements Serializable {
     }
 
     public String getEmail() {
+
         return email;
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 
     public String getCpfOUcnpj() {
+
         return cpfOUcnpj;
     }
 
     public void setCpfOUcnpj(String cpfOUcnpj) {
+
         this.cpfOUcnpj = cpfOUcnpj;
     }
 
     public TipoCliente getTipo() {
+
         return TipoCliente.toEnum(tipo);
     }
 
@@ -93,19 +101,31 @@ public class Cliente implements Serializable {
     }
 
     public List<Endereco> getEnderecos() {
+
         return enderecos;
     }
 
     public void setEnderecos(List<Endereco> enderecos) {
+
         this.enderecos = enderecos;
     }
 
     public Set<String> getTelefones() {
+
         return telefones;
     }
 
     public void setTelefones(Set<String> telefones) {
+
         this.telefones = telefones;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override
