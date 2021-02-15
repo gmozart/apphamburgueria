@@ -1,5 +1,6 @@
 package com.gleison.apphamburgueria.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Pedido implements Serializable {
       @Column(name = "ID_PEDIDO")
       private Long id;
 
+      @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
       private Date instante;
 
       @JsonManagedReference
