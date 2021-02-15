@@ -1,5 +1,7 @@
 package com.gleison.apphamburgueria.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -22,6 +24,7 @@ public class Pedido implements Serializable {
       @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
       private Pagamento pagamento;
 
+      @JsonManagedReference
       @ManyToOne
       @JoinColumn(name = "cliente_id")
       private Cliente cliente;
