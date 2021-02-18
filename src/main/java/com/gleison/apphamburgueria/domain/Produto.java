@@ -24,7 +24,7 @@ public class Produto implements Serializable {
     @Column(name = "PRECO_PRODUTO")
     private BigDecimal preco;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"),
     inverseJoinColumns = @JoinColumn(name = "categoria_id"))

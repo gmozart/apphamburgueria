@@ -1,6 +1,7 @@
 package com.gleison.apphamburgueria.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,7 +22,7 @@ public class Estado implements Serializable{
     @Column(name="NOME_ESTADO")
     private String nome;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy= "estado")
     private List<Cidade> cidade = new ArrayList<>();
 
