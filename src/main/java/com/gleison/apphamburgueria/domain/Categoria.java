@@ -1,6 +1,5 @@
 package com.gleison.apphamburgueria.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
