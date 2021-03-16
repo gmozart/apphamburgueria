@@ -3,6 +3,7 @@ package com.gleison.apphamburgueria.controller;
 
 import com.gleison.apphamburgueria.domain.Categoria;
 import com.gleison.apphamburgueria.repositories.CategoriaRepository;
+import com.gleison.apphamburgueria.services.CategoriaService;
 import com.gleison.apphamburgueria.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,10 @@ import java.util.Optional;
 public class CategoriaController {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository; //Será Substituído pelo Service
+
+    @Autowired
+    private CategoriaService service;
 
     @GetMapping
     public ResponseEntity<?> listar(){
@@ -29,23 +33,30 @@ public class CategoriaController {
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
-    public Categoria find(@PathVariable Long id){
-     Optional<Categoria> objCategoria = categoriaRepository.findById(id);
+    public Categoria buscar(@PathVariable Long id){
+     Optional<Categoria> objCategoria = service.find(id);
+
      return objCategoria.orElseThrow(()
              -> new ObjectNotFoundException(" Código de Categoria não encontrado! Código: "+id +
-                ", Tipo: " + Categoria.class.getName()));
+             ", Tipo: " + Categoria.class.getName()));
     }
 
-    @PostMapping
-    public ResponseEntity<Categoria> criar(@RequestBody Categoria categoria, HttpServletResponse response){
-        Categoria categoriaSalva = categoriaRepository.save(categoria);
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Categoria> insert(@RequestBody Categoria categoria, HttpServletResponse response){
+
+        categoria = service.insert(categoria);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-        .buildAndExpand(categoriaSalva.getId()).toUri();
-        response.setHeader("Location",uri.toASCIIString());
+        .buildAndExpand(categoria.getId()).toUri();
 
-      return ResponseEntity.created(uri).body(categoriaSalva);
+      return ResponseEntity.created(uri).body(categoria);
     }
 
+    //RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    //public ResponseEntity<Void> update(@RequestBody Categoria objCategoria, @PathVariable Long id){
+
+        // objCategoria.setId(id);
+   //}
 
 }
