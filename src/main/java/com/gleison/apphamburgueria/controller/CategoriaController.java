@@ -43,20 +43,23 @@ public class CategoriaController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Categoria> insert(@RequestBody Categoria categoria, HttpServletResponse response){
+    public ResponseEntity<Categoria> insert(@RequestBody Categoria objCategoria, HttpServletResponse response){
 
-        categoria = service.insert(categoria);
+        objCategoria = service.insert(objCategoria);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-        .buildAndExpand(categoria.getId()).toUri();
+        .buildAndExpand(objCategoria.getId()).toUri();
 
-      return ResponseEntity.created(uri).body(categoria);
+      return ResponseEntity.created(uri).body(objCategoria);
     }
 
-    //RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    //public ResponseEntity<Void> update(@RequestBody Categoria objCategoria, @PathVariable Long id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody Categoria objCategoria, @PathVariable Long id){
 
-        // objCategoria.setId(id);
-   //}
+         objCategoria.setId(id);
+         objCategoria = service.update(objCategoria);
+
+         return ResponseEntity.noContent().build();
+   }
 
 }
