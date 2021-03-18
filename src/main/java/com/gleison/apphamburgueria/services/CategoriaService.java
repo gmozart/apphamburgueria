@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import com.gleison.apphamburgueria.repositories.CategoriaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -16,6 +17,11 @@ public class CategoriaService {
 
     @Autowired
     public CategoriaRepository categoriaRepository;
+
+    public List<Categoria> findAll(){
+
+        return categoriaRepository.findAll();
+    }
 
 
     public Optional<Categoria> find(Long id){

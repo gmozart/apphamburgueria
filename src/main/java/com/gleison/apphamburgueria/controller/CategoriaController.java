@@ -24,12 +24,12 @@ public class CategoriaController {
     @Autowired
     private CategoriaService service;
 
-    @GetMapping
-    public ResponseEntity<?> listar(){
+    @RequestMapping( method = RequestMethod.GET)
+    public ResponseEntity<List<Categoria>> findAll(){
 
-        List<Categoria> categorias = categoriaRepository.findAll();
+        List<Categoria> ListaCategorias = service.findAll();
 
-      return !categorias.isEmpty() ? ResponseEntity.ok(categorias) : ResponseEntity.noContent().build();
+      return !ListaCategorias.isEmpty() ? ResponseEntity.ok(ListaCategorias) : ResponseEntity.noContent().build();
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
