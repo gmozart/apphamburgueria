@@ -2,6 +2,7 @@ package com.gleison.apphamburgueria.controller;
 
 
 import com.gleison.apphamburgueria.domain.Categoria;
+import com.gleison.apphamburgueria.dto.CategoriaDTO;
 import com.gleison.apphamburgueria.repositories.CategoriaRepository;
 import com.gleison.apphamburgueria.services.CategoriaService;
 import com.gleison.apphamburgueria.services.exception.ObjectNotFoundException;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequestMapping("/categorias")
 @RestController
@@ -25,11 +28,11 @@ public class CategoriaController {
     private CategoriaService service;
 
     @RequestMapping( method = RequestMethod.GET)
-    public ResponseEntity<List<Categoria>> findAll(){
+    public ResponseEntity<List<CategoriaDTO>> findAll(){
 
         List<Categoria> ListaCategorias = service.findAll();
-
-      return !ListaCategorias.isEmpty() ? ResponseEntity.ok(ListaCategorias) : ResponseEntity.noContent().build();
+        List<CategoriaDTO> listDTO = ListaCategorias.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+      return !listDTO.isEmpty() ? ResponseEntity.ok(listDTO) : ResponseEntity.noContent().build();
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
