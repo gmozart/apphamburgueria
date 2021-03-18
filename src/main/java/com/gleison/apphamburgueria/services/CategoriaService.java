@@ -1,8 +1,10 @@
 package com.gleison.apphamburgueria.services;
 
 import com.gleison.apphamburgueria.domain.Categoria;
+import com.gleison.apphamburgueria.services.exception.DataIntegrityException;
 import com.gleison.apphamburgueria.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import com.gleison.apphamburgueria.repositories.CategoriaRepository;
 
@@ -41,6 +43,19 @@ public class CategoriaService {
         return categoriaRepository.save(objCategoria);
        }
 
+       public void delete(Long id){
+       find(id);
+
+       try {
+           categoriaRepository.deleteById(id);
+           }
+       catch (DataIntegrityViolationException e){
+
+           throw new DataIntegrityException("Não é possível Excluir uma " +
+                   "Categoria que possui Produtos");
+
+          }
+       }
 
     }
 

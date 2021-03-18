@@ -8,4 +8,5 @@ import com.gleison.apphamburgueria.domain.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
+
 }
