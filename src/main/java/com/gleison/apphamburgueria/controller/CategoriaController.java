@@ -7,6 +7,7 @@ import com.gleison.apphamburgueria.repositories.CategoriaRepository;
 import com.gleison.apphamburgueria.services.CategoriaService;
 import com.gleison.apphamburgueria.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -72,5 +73,19 @@ public class CategoriaController {
 
        return ResponseEntity.noContent().build();
    }
+
+
+    @RequestMapping(value="/page", method = RequestMethod.GET)
+    public ResponseEntity<Page<CategoriaDTO>> findPage(
+             @RequestParam(value = "page", defaultValue = "0") Integer page,
+             @RequestParam(value = "linesPage", defaultValue = "24") Integer linesPage,
+             @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+             @RequestParam(value ="direction", defaultValue = "ASC") String direction
+            ){
+
+        Page<Categoria> list = service.findPage(page, linesPage, orderBy, direction);
+        Page<CategoriaDTO> listDTO = list.map(objCategoria -> new CategoriaDTO(objCategoria));
+        return ResponseEntity.ok().body(listDTO);
+    }
 
 }
