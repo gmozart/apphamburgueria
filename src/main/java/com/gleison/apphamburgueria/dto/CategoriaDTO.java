@@ -2,9 +2,9 @@ package com.gleison.apphamburgueria.dto;
 
 
 import com.gleison.apphamburgueria.domain.Categoria;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 public class CategoriaDTO implements Serializable {
@@ -13,7 +13,7 @@ public class CategoriaDTO implements Serializable {
     private Long id;
 
     @NotBlank(message = "Preenchimento Obrigatório")
-    @Size(min =5, max = 80, message = "O Tamanho deve ser ente 5 e 80 caracteres")
+    @Length(min =5, max = 80, message = "O Tamanho deve ser ente 5 e 80 caracteres")
     private String nome;
 
     public CategoriaDTO(){
