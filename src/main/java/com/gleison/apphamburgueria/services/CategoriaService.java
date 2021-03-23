@@ -1,6 +1,7 @@
 package com.gleison.apphamburgueria.services;
 
 import com.gleison.apphamburgueria.domain.Categoria;
+import com.gleison.apphamburgueria.dto.CategoriaDTO;
 import com.gleison.apphamburgueria.services.exception.DataIntegrityException;
 import com.gleison.apphamburgueria.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,12 @@ public class CategoriaService {
            PageRequest pageRequest = PageRequest.of(page, linesPage, Sort.Direction.valueOf(direction), orderBy);
 
        return categoriaRepository.findAll(pageRequest);
+        }
+
+
+        public Categoria fromDTO(CategoriaDTO objDTO){
+
+        return new Categoria(objDTO.getId(), objDTO.getNome());
         }
     }
 

@@ -11,9 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.net.URI;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,7 +48,9 @@ public class CategoriaController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Categoria> insert(@RequestBody Categoria objCategoria, HttpServletResponse response){
+    public ResponseEntity<Categoria> insert(@Valid @RequestBody CategoriaDTO objDTO, HttpServletResponse response){
+
+        Categoria objCategoria = service.fromDTO(objDTO);
 
         objCategoria = service.insert(objCategoria);
 
