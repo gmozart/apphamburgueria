@@ -1,14 +1,22 @@
 package com.gleison.apphamburgueria.dto;
 
 import com.gleison.apphamburgueria.domain.Cliente;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public class ClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    @NotBlank(message = "Preenchimento Obrigatório")
+    @Length(min =5, max = 120, message = "O Tamanho deve ser ente 5 e 120 caracteres")
     private String nome;
+
+    @NotBlank(message = "Preenchimento Obrigatório")
+    @Email(message = "Email Inválido")
     private String email;
 
 

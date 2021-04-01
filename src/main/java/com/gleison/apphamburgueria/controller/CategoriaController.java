@@ -3,7 +3,6 @@ package com.gleison.apphamburgueria.controller;
 
 import com.gleison.apphamburgueria.domain.Categoria;
 import com.gleison.apphamburgueria.dto.CategoriaDTO;
-import com.gleison.apphamburgueria.repositories.CategoriaRepository;
 import com.gleison.apphamburgueria.services.CategoriaService;
 import com.gleison.apphamburgueria.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/categorias")
 @RestController
 public class CategoriaController {
-
-    @Autowired
-    private CategoriaRepository categoriaRepository; //Será Substituído pelo Service
 
     @Autowired
     private CategoriaService service;
